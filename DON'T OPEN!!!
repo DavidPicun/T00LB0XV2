@@ -7,7 +7,7 @@ local LocalPlayer = Players.LocalPlayer
 -- URL ТВОЕГО СЕРВЕРА
 local SERVER_URL = "https://deddesrt-production.up.railway.app/verify"
 
--- ⚠ ВСТАВЬ СЮДА RAW-ССЫЛКУ НА ТВОЙ ГЛАВНЫЙ SCRIPT.LUA ИЗ GITHUB:
+-- ⚠️ ВСТАВЬ СЮДА RAW-ССЫЛКУ НА ТВОЙ ГЛАВНЫЙ SCRIPT.LUA ИЗ GITHUB:
 local MAIN_SCRIPT_URL = "https://raw.githubusercontent.com/VOVADEDEGORA/18-VOVA/refs/heads/main/script.lua"
 
 local parentGui = (gethui and gethui()) or game:GetService("CoreGui") or LocalPlayer:WaitForChild("PlayerGui")
@@ -22,24 +22,22 @@ ScreenGui.Name = "T00LB0XV2_KeyMenu"
 ScreenGui.ResetOnSpawn = false
 ScreenGui.Parent = parentGui
 
--- Главный контейнер (для анимации появления из центра)
 local Container = Instance.new("Frame")
 Container.Size = UDim2.new(1, 0, 1, 0)
 Container.BackgroundTransparency = 1
 Container.Parent = ScreenGui
 
--- Само меню (СДЕЛАЛ КВАДРАТНЫМ И БОЛЬШЕ)
+-- Главное окно (ШИРОКОЕ)
 local MainFrame = Instance.new("Frame")
 MainFrame.Name = "MainFrame"
 MainFrame.Size = UDim2.new(0, 0, 0, 0) -- Начинаем с 0 для анимации
 MainFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
-MainFrame.AnchorPoint = Vector2.new(0.5, 0.5) -- Чтобы увеличивалось от центра
-MainFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 26) -- Темный современный фон
+MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+MainFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 26)
 MainFrame.BorderSizePixel = 0
 MainFrame.ClipsDescendants = true
 MainFrame.Parent = Container
 
--- Аккуратные закругления
 local MainCorner = Instance.new("UICorner")
 MainCorner.CornerRadius = UDim.new(0, 10)
 MainCorner.Parent = MainFrame
@@ -49,9 +47,9 @@ MainStroke.Color = Color3.fromRGB(45, 45, 55)
 MainStroke.Thickness = 1.5
 MainStroke.Parent = MainFrame
 
--- Верхняя панель (сделал чуть выше для простора)
+-- Верхняя панель
 local TopBar = Instance.new("Frame")
-TopBar.Size = UDim2.new(1, 0, 0, 45)
+TopBar.Size = UDim2.new(1, 0, 0, 42)
 TopBar.BackgroundColor3 = Color3.fromRGB(15, 15, 20)
 TopBar.BorderSizePixel = 0
 TopBar.Parent = MainFrame
@@ -60,7 +58,6 @@ local TopBarCorner = Instance.new("UICorner")
 TopBarCorner.CornerRadius = UDim.new(0, 10)
 TopBarCorner.Parent = TopBar
 
--- Заплатка чтобы низ верхней панели был прямым
 local TopBarFix = Instance.new("Frame")
 TopBarFix.Size = UDim2.new(1, 0, 0, 10)
 TopBarFix.Position = UDim2.new(0, 0, 1, -10)
@@ -87,10 +84,10 @@ TitleLabel.Font = Enum.Font.GothamMedium
 TitleLabel.TextXAlignment = Enum.TextXAlignment.Left
 TitleLabel.Parent = TopBar
 
--- Кнопка закрытия (Увеличил, выровнял по центру плашки)
+-- Кнопка закрытия
 local CloseButton = Instance.new("TextButton")
-CloseButton.Size = UDim2.new(0, 30, 0, 30)
-CloseButton.Position = UDim2.new(1, -35, 0.5, -15)
+CloseButton.Size = UDim2.new(0, 28, 0, 28)
+CloseButton.Position = UDim2.new(1, -34, 0.5, -14)
 CloseButton.BackgroundColor3 = Color3.fromRGB(20, 20, 26)
 CloseButton.BorderSizePixel = 0
 CloseButton.Text = "✕"
@@ -104,7 +101,6 @@ local CloseCorner = Instance.new("UICorner")
 CloseCorner.CornerRadius = UDim.new(0, 6)
 CloseCorner.Parent = CloseButton
 
--- Анимация кнопки закрытия
 CloseButton.MouseEnter:Connect(function()
     TweenService:Create(CloseButton, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(255, 65, 65), TextColor3 = Color3.fromRGB(255, 255, 255)}):Play()
 end)
@@ -118,7 +114,7 @@ CloseButton.MouseButton1Click:Connect(function()
     ScreenGui:Destroy()
 end)
 
--- Перетаскивание меню (Плавное)
+-- Перетаскивание
 local dragging, dragInput, dragStart, startPos
 TopBar.InputBegan:Connect(function(input)
     if input.UserInputType == Enum.UserInputType.MouseButton1 then
@@ -140,17 +136,17 @@ UserInputService.InputChanged:Connect(function(input)
     end
 end)
 
--- Контейнер для содержимого, чтобы организовать отступы
+-- Контейнер содержимого
 local ContentContainer = Instance.new("Frame")
-ContentContainer.Size = UDim2.new(1, -40, 1, -65) -- Отступы от краев и верхней панели
-ContentContainer.Position = UDim2.new(0, 20, 0, 55)
+ContentContainer.Size = UDim2.new(1, -40, 1, -57)
+ContentContainer.Position = UDim2.new(0, 20, 0, 50)
 ContentContainer.BackgroundTransparency = 1
 ContentContainer.Parent = MainFrame
 
--- Поле ввода KEY (Сделал больше и спустил ниже)
+-- Поле ввода KEY
 local KeyInput = Instance.new("TextBox")
-KeyInput.Size = UDim2.new(1, 0, 0, 45)
-KeyInput.Position = UDim2.new(0, 0, 0, 20)
+KeyInput.Size = UDim2.new(1, 0, 0, 42)
+KeyInput.Position = UDim2.new(0, 0, 0, 10)
 KeyInput.BackgroundColor3 = Color3.fromRGB(12, 12, 16)
 KeyInput.BorderSizePixel = 0
 KeyInput.PlaceholderText = "Enter Key..."
@@ -170,27 +166,27 @@ KeyStroke.Color = Color3.fromRGB(35, 35, 45)
 KeyStroke.Thickness = 1.5
 KeyStroke.Parent = KeyInput
 
--- Текст ошибок (ОШИБКИ ПО ЦЕНТРУ)
+-- Текст ошибок (ПО ЦЕНТРУ)
 local ErrorLabel = Instance.new("TextLabel")
 ErrorLabel.Size = UDim2.new(1, 0, 0, 20)
-ErrorLabel.Position = UDim2.new(0, 0, 0, 75) -- Отступ от поля ввода
+ErrorLabel.Position = UDim2.new(0, 0, 0, 58)
 ErrorLabel.BackgroundTransparency = 1
 ErrorLabel.Text = ""
 ErrorLabel.TextColor3 = Color3.fromRGB(255, 75, 75)
 ErrorLabel.TextSize = 12
 ErrorLabel.Font = Enum.Font.GothamMedium
-ErrorLabel.TextXAlignment = Enum.TextXAlignment.Center -- Выравнивание по центру!
+ErrorLabel.TextXAlignment = Enum.TextXAlignment.Center
 ErrorLabel.Parent = ContentContainer
 
--- Кнопка LOGIN (Увеличил отступы)
+-- Кнопка LOGIN (ПРИКРЕПЛЕНА ПРЯМО К НИЗУ)
 local LoginButton = Instance.new("TextButton")
-LoginButton.Size = UDim2.new(1, 0, 0, 45)
-LoginButton.Position = UDim2.new(0, 0, 0, 105)
+LoginButton.Size = UDim2.new(1, 0, 0, 42)
+LoginButton.Position = UDim2.new(0, 0, 1, -44)
 LoginButton.BackgroundColor3 = Color3.fromRGB(110, 86, 238)
 LoginButton.BorderSizePixel = 0
 LoginButton.Text = "Login"
 LoginButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-LoginButton.TextSize = 15
+LoginButton.TextSize = 14
 LoginButton.Font = Enum.Font.GothamMedium
 LoginButton.AutoButtonColor = false
 LoginButton.Parent = ContentContainer
@@ -199,7 +195,6 @@ local LoginCorner = Instance.new("UICorner")
 LoginCorner.CornerRadius = UDim.new(0, 8)
 LoginCorner.Parent = LoginButton
 
--- Анимация кнопки Login
 LoginButton.MouseEnter:Connect(function()
     TweenService:Create(LoginButton, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(130, 106, 255)}):Play()
 end)
@@ -207,13 +202,12 @@ LoginButton.MouseLeave:Connect(function()
     TweenService:Create(LoginButton, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(110, 86, 238)}):Play()
 end)
 
--- === АНИМАЦИЯ ПОЯВЛЕНИЯ (Квадратный размер) ===
--- Установил размер 280x280 для идеального квадрата
+-- === АНИМАЦИЯ ПОЯВЛЕНИЯ (ШИРИНА 420px) ===
 TweenService:Create(MainFrame, TweenInfo.new(0.5, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {
-    Size = UDim2.new(0, 280, 0, 280) 
+    Size = UDim2.new(0, 420, 0, 205)
 }):Play()
 
--- === ЛОГИКА ===
+-- === УНИВЕРСАЛЬНАЯ ЛОГИКА ЗАПРОСА ===
 local requestFunc = (syn and syn.request) or (http and http.request) or request or http_request
 
 local function checkKey()
@@ -225,36 +219,46 @@ local function checkKey()
         return
     end
 
-    ErrorLabel.Text = "" 
+    ErrorLabel.Text = ""
+
+    if not requestFunc then
+        ErrorLabel.Text = "Executor request not supported"
+        return
+    end
 
     local success, response = pcall(function()
         return requestFunc({
             Url = SERVER_URL,
             Method = "POST",
-            Headers = { ["Content-Type"] = "application/json" },
+            Headers = { 
+                ["Content-Type"] = "application/json",
+                ["User-Agent"] = "Roblox/WinInet"
+            },
             Body = HttpService:JSONEncode({ nickname = nickname, key = key })
         })
     end)
 
-    if not success or type(response) ~= "table" or not response.StatusCode then
+    if not success or type(response) ~= "table" then
+        warn("Request Failed:", tostring(response))
         ErrorLabel.Text = "Server Offline"
         return
     end
 
-    if response.StatusCode >= 500 or response.StatusCode == 404 then
+    local statusCode = response.StatusCode or response.status_code or response.Status
+    local responseBody = response.Body or response.body
+
+    if not responseBody then
         ErrorLabel.Text = "Server Offline"
         return
     end
 
     local decodeSuccess, data = pcall(function()
-        return HttpService:JSONDecode(response.Body)
+        return HttpService:JSONDecode(responseBody)
     end)
 
-    if response.StatusCode == 200 then
-        -- МОМЕНТАЛЬНО УДАЛЯЕМ МЕНЮ БЕЗ ЗАДЕРЖЕК
+    if statusCode == 200 or (decodeSuccess and data and data.status == "success") then
         ScreenGui:Destroy() 
 
-        -- Запускаем скрипт
         local scriptSuccess, scriptError = pcall(function()
             loadstring(game:HttpGet(MAIN_SCRIPT_URL))()
         end)
@@ -263,15 +267,14 @@ local function checkKey()
             warn("Script Load Error: " .. tostring(scriptError)) 
         end
     else
-        -- Конвертация русских ошибок сервера на английский
-        if decodeSuccess and data and data.detail then
-            local serverError = data.detail
+        if decodeSuccess and data and (data.detail or data.message) then
+            local serverError = tostring(data.detail or data.message)
             if string.find(serverError, "не подходящий") or string.find(serverError, "неверный") then
                 ErrorLabel.Text = "Invalid Key"
             elseif string.find(serverError, "не зарегистрирован") then
                 ErrorLabel.Text = "Key not registered to this user"
             else
-                ErrorLabel.Text = "Invalid Key"
+                ErrorLabel.Text = serverError
             end
         else
             ErrorLabel.Text = "Invalid Key"
